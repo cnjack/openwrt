@@ -15,11 +15,11 @@ steps:
     image: plugins/github-release
     volumes:
       - name: cache
-        path: /bin
+        path: /home/build/openwrt/bin
     settings:
       api_key: 
         from_secret: access_token
       files:
-        - /bin/*
+        - /home/build/openwrt/bin/*
     when:
       event: tag
