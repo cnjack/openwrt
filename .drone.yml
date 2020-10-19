@@ -10,7 +10,7 @@ steps:
         path: /home/build/openwrt/bin
     commands:
       - ls ./
-      - make image
+      - cd /home/build/openwrt && make image
 
   - name: publish
     image: plugins/github-release
