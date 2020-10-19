@@ -1,0 +1,21 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: build
+    image: openwrtorg/imagebuilder
+    commands:
+      - make image
+    volumes:
+      - name: cache
+        path: /home/build/openwrt/bin
+  - name: publish
+    image: plugins/github-release
+    settings:
+      api_key: access_token
+      files:
+        - /bin/*
+    volumes:
+      - name: cache
+        path: /bin
