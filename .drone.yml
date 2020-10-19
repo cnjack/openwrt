@@ -5,17 +5,19 @@ name: default
 steps:
   - name: build
     image: openwrtorg/imagebuilder
-    commands:
-      - make image
     volumes:
       - name: cache
         path: /home/build/openwrt/bin
+    commands:
+      - ls ./
+      - make image
+
   - name: publish
     image: plugins/github-release
+    volumes:
+      - name: cache
+        path: /bin
     settings:
       api_key: access_token
       files:
         - /bin/*
-    volumes:
-      - name: cache
-        path: /bin
